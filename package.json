@@ -1,6 +1,6 @@
 {
   "name": "runtime-cna-starter",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
     "dev": "NODE_ENV=development PORT=9080 nodemon --inspect $NODE_DEBUG_OPTION --watch web-src/resources --watch actions/ --watch manifest.yml ./scripts/parcel.proxy.js",
