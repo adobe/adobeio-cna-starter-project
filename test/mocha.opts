@@ -1,0 +1,6 @@
+--require @babel/register
+--require @babel/polyfill
+--require ignore-styles
+--require ./test/helpers/browser.js
+--exclude test/e2e/*.js
+--recursive

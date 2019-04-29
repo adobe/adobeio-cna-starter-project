@@ -1,0 +1,4 @@
+{
+  "browsers": "chrome:headless",
+  "src": ["./test/e2e/**/*.test.js"]
+}
