@@ -8,8 +8,7 @@ A starter project for building a cloud native app (CNA) on top of Adobe I/O Runt
 
   ```bash
   npm install -g @adobe/aio-cli
-  npm config set @io-dev-tools:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release
-  aio plugins install @io-dev-tools/aio-cli-plugin-runtime
+  aio plugins install @adobe/aio-cli-plugin-runtime
   ```
 
 - `npm install`
