@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "8"
+  - "10"
 env:
   - CXX=g++-4.8
 addons:
@@ -9,3 +10,9 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+install:
+  - npm version
+  - npm install
+script:
+  - npm build
+  - npm test
