@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development PORT=9080 nodemon --watch web-src/resources --watch actions/ --watch manifest.yml ./scripts/parcel.proxy.js",
+    "dev": "cross-env NODE_ENV=development PORT=9080 nodemon INSPECT=$NODE_DEBUG_OPTIONS --inspect $INSPECT --watch web-src/resources --watch actions/ --watch manifest.yml ./scripts/parcel.proxy.js",
     "build:ui": "cross-env NODE_ENV=production REMOTE_ACTIONS=true node scripts/build.ui.js",
     "build:actions": "cross-env NODE_ENV=production node scripts/build.actions.js",
     "build": "npm run build:ui && npm run build:actions",
