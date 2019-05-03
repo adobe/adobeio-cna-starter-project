@@ -1,17 +1,15 @@
 language: node_js
 node_js:
-  - "8"
+  - "10"
 env:
   - CXX=g++-4.8
 addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+  chrome: stable
 install:
   - npm version
   - npm install
 script:
   - npm run build
   - npm test
+  - npm run e2e
+  
