@@ -55,6 +55,7 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.18.6",
     "nyc": "^13.1.0",
+    "open": "^6.2.0",
     "openwhisk": "^3.18.0",
     "parcel-bundler": "^1.10.3",
     "postcss-modules": "^1.4.1",
