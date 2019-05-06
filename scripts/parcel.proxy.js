@@ -14,8 +14,8 @@ governing permissions and limitations under the License.
  */
 const Bundler = require('parcel-bundler')
 const express = require('express')
+const open = require('open')
 const ActionRunner = require('./runner')
-
 const config = require('./script.config')
 
 /**
@@ -51,3 +51,5 @@ const port = Number(process.env.PORT || 9000)
 app.listen(port)
 
 console.log('Serving on port', port)
+
+open(`http://localhost:${port}`)

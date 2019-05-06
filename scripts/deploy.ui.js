@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 const path = require('path')
 const fs = require('fs')
 const aws = require('aws-sdk')
+const open = require('open')
 const utils = require('./script.utils')
 const config = require('./script.config')
 
@@ -31,10 +32,13 @@ async function deployStaticS3 () {
   await utils.s3.uploadDir(s3, config.s3DeploymentFolder,
     config.distUIRemoteDir, f => console.log(`  -> ${path.basename(f)}`))
 
-  const appUrl = `https://s3.amazonaws.com/${creds.params.Bucket}/${config.s3DeploymentFolder}`
-  console.log(`Access your app @ ${appUrl}/index.html !`)
+  return `https://s3.amazonaws.com/${creds.params.Bucket}/${config.s3DeploymentFolder}/index.html`
 }
 
 deployStaticS3()
-  .then(() => console.log('Succesfully deployed UI 🎉'))
+  .then(url => {
+    console.log(url)
+    console.log('Succesfully deployed UI 🎉')
+    return open(url)
+  })
   .catch(e => console.error(e))
