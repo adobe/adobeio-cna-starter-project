@@ -28,10 +28,14 @@ A starter project for building a cloud native app (CNA) on top of Adobe I/O Runt
 - Run `npm run e2e` to run e2e tests
 - Run `npm run coverage` to generate Code coverage report
 
-## Build & Deploy
+## Build, Deploy & Cleanup
 
 - `npm run build` to build your ui:React code and build your actions
 - `npm run deploy` to deploy all actions on Runtime and static files to S3
+- `npm run undeploy` to undeploy the app
+
+For each of the above command you can either append `:ui` or `:actions`, for
+example `npm run build:ui` will only build the UI.
 
 ## Dependencies
 

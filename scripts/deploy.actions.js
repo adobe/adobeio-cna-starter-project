@@ -36,7 +36,6 @@ function deployActionsSync () {
       action.function = path.join(path.relative(config.rootDir, config.distActionsDir), name + '.zip')
     } else {
       action.function = path.join(path.relative(config.rootDir, config.distActionsDir), name + '.js')
-      // this is needed because of https://github.com/apache/incubator-openwhisk-runtime-nodejs/issues/14
       action.main = 'module.exports.' + (action.main || 'main')
     }
   })
