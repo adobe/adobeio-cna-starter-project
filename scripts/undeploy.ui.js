@@ -17,7 +17,7 @@ async function undeployStaticS3 () {
   const s3 = new aws.S3(creds)
 
   if (!(await utils.s3.folderExists(s3, config.s3DeploymentFolder))) {
-    throw new Error(`Cannot undeploy UI files, seems like they are not deployed?`)
+    throw new Error(`Cannot undeploy UI files, S3 folder ${config.s3DeploymentFolder} does not exist.`)
   }
   console.info(`Removing static web files from S3...`)
   await utils.s3.emptyFolder(s3, config.s3DeploymentFolder)
