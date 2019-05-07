@@ -166,8 +166,8 @@ function zipFolder (dir, out) {
  */
 function urlJoin (...args) {
   let start = ''
-  if (args[0].startsWith('/')) start = '/'
-  return start + args.map(a => a.replace(/(^\/|\/$)/g, '')).filter(a => a).join('/')
+  if (args[0] && args[0].startsWith('/')) start = '/'
+  return start + args.map(a => a && a.replace(/(^\/|\/$)/g, '')).filter(a => a).join('/')
 }
 
 module.exports = {
