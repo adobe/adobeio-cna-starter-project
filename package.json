@@ -13,7 +13,7 @@
     "undeploy:ui": "cross-env NODE_ENV=production node scripts/undeploy.ui.js",
     "undeploy:actions": "cross-env NODE_ENV=production node scripts/undeploy.actions.js",
     "undeploy": "npm run undeploy:actions && npm run undeploy:ui",
-    "lint": "eslint './actions/**/*.js' './web-src/**/*.js' './scripts/**/*.js' './test/**/*.js'",
+    "lint": "cross-env eslint './actions/**/*.js' './web-src/**/*.js' './scripts/**/*.js' './test/**/*.js'",
     "beautify": "npm run lint -- --fix",
     "test": "npm run lint && mocha",
     "e2e": "node scripts/build.ui.js && cross-env PORT=9080 NODE_ENV=development node scripts/express.e2e.js",
