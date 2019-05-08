@@ -25,7 +25,10 @@
     "aio-cna:template"
   ],
   "author": "Adobe Inc",
+  "license": "Apache-2.0",
   "bugs": "https://github.com/adobe/adobeio-cna-starter-project/issues",
+  "repository": "adobe/adobeio-cna-starter-project",
+  "homepage": "https://github.com/adobe/adobeio-cna-starter-project",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
