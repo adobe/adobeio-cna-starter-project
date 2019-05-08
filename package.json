@@ -1,7 +1,7 @@
 {
   "name": "adobeio-cna-starter-project",
   "version": "0.1.0",
-  "description": "",
+  "description": "A starter project for building a cloud native app (CNA) on top of Adobe I/O Runtime",
   "scripts": {
     "dev": "cross-env NODE_ENV=development PORT=9080 nodemon INSPECT=$NODE_DEBUG_OPTIONS --inspect $INSPECT --watch web-src/resources --watch actions/ --watch manifest.yml ./scripts/parcel.proxy.js",
     "build:ui": "cross-env NODE_ENV=production REMOTE_ACTIONS=true node scripts/build.ui.js",
@@ -21,7 +21,7 @@
     "clean": "git clean -Xdf --exclude='!.env*'"
   },
   "keywords": [],
-  "author": "",
+  "author": "Adobe Inc",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
