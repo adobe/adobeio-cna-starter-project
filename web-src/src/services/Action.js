@@ -15,6 +15,8 @@ import { AppError, RequestValidationError } from './Errors'
 
 const Action = {}
 
+/* global fetch */
+
 /**
  * Invokes a web action and returns the response.
  * @param  {string} actionName
