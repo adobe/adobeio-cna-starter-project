@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 const fs = require('fs')
 const path = require('path')
-const childProcess = require('child_process')
+const spawn = require('cross-spawn')
 
 const config = require('./script.config')
 
@@ -22,7 +22,7 @@ function installDep () {
     if (fs.statSync(actionPath).isDirectory() &&
         fs.readdirSync(actionPath).includes('package.json')) {
       // npm install
-      const install = childProcess.spawnSync(`npm`, ['install', '--no-package-lock'], { cwd: actionPath })
+      const install = spawn.sync(`npm`, ['install', '--no-package-lock'], { cwd: actionPath })
       if (install.error) throw install.error
       if (install.status !== 0) throw new Error(install.stderr.toString())
     }

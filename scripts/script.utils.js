@@ -49,14 +49,13 @@ async function emptyFolder (s3Client, prefix = '') {
 }
 /**
  * Uploads a file to s3
- * @param  {} s3Client with bucket configured
  * @param  {string} file
  * @param  {string} [prefix = ''] - s3 prefix to upload the file to
  */
 async function uploadFile (s3Client, file, prefix = '') {
   const content = await fs.readFile(file)
   const uploadParams = {
-    Key: path.join(prefix, path.basename(file)),
+    Key: urlJoin(prefix, path.basename(file)),
     Body: content,
     ACL: 'public-read',
     // s3 misses some mime types like for css files
@@ -160,6 +159,17 @@ function zipFolder (dir, out) {
   })
 }
 
+/**
+ * Joins url path parts
+ * @param {...string} args url parts
+ * @returns {string}
+ */
+function urlJoin (...args) {
+  let start = ''
+  if (args[0] && args[0].startsWith('/')) start = '/'
+  return start + args.map(a => a && a.replace(/(^\/|\/$)/g, '')).filter(a => a).join('/')
+}
+
 module.exports = {
   s3: {
     folderExists: folderExists,
@@ -168,5 +178,6 @@ module.exports = {
     uploadDir: uploadDir
   },
   getTmpS3Credentials: getTmpS3Credentials,
-  zipFolder: zipFolder
+  zipFolder: zipFolder,
+  urlJoin: urlJoin
 }

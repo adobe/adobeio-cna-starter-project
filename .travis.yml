@@ -1,10 +1,16 @@
 language: node_js
+os:
+  - windows
+  - linux
 node_js:
   - "10"
+  - "12"
 env:
   - CXX=g++-4.8
 addons:
   chrome: stable
+before_install:
+  - if [ "${TRAVIS_OS_NAME}" = "windows" ]; then choco install googlechrome ; fi
 install:
   - npm version
   - npm install
@@ -12,4 +18,4 @@ script:
   - npm run build
   - npm test
   - npm run e2e
-  
+  - npm run clean

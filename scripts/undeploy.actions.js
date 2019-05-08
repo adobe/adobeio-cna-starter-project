@@ -9,7 +9,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 const fs = require('fs')
-const childProcess = require('child_process')
+const spawn = require('cross-spawn')
 const config = require('./script.config')
 const path = require('path')
 
@@ -26,7 +26,7 @@ function undeployActionsSync () {
   process.env['WSK_CONFIG_FILE'] = fakeWskProps
 
   // aio reads env WHISK_* properties
-  const aio = childProcess.spawnSync(
+  const aio = spawn.sync(
     `aio`,
     [
       'runtime', 'deploy',
