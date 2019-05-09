@@ -35,4 +35,8 @@ async function buildUI () {
   console.log('UI Build succeeded!')
 }
 
-buildUI().catch(e => console.error(e))
+buildUI()
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })

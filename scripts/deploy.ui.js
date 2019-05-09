@@ -18,7 +18,7 @@ const config = require('./script.config')
 
 async function deployStaticS3 () {
   if (!fs.existsSync(config.distUIRemoteDir) || !fs.statSync(config.distUIRemoteDir).isDirectory() || !fs.readdirSync(config.distUIRemoteDir).length) {
-    throw new Error(config.distUIRemoteDir + ' should not be empty, maybe you forgot to build your UI ?')
+    throw new Error(`./${path.relative(config.rootDir, config.distUIRemoteDir)}/ should not be empty, maybe you forgot to build your UI ?`)
   }
   console.log(`Uploading static web files to S3...`)
 
@@ -41,4 +41,7 @@ deployStaticS3()
     console.log('Succesfully deployed UI 🎉')
     return open(url)
   })
-  .catch(e => console.error(e))
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })

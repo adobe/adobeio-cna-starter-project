@@ -23,4 +23,9 @@ function generateConfig () {
   )
 }
 
-generateConfig()
+try {
+  generateConfig()
+} catch (e) {
+  console.error(e)
+  process.exit(1)
+}

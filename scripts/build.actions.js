@@ -56,4 +56,8 @@ async function buildActions () {
   console.log('Action Build succeeded!')
 }
 
-buildActions().catch(e => console.error(e))
+buildActions()
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })

@@ -29,4 +29,9 @@ function installDep () {
   })
 }
 
-installDep()
+try {
+  installDep()
+} catch (e) {
+  console.error(e)
+  process.exit(1)
+}

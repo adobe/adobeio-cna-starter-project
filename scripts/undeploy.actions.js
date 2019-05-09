@@ -54,4 +54,5 @@ try {
   console.log('Succesfully undeployed actions!')
 } catch (e) {
   console.error(e)
+  process.exit(1)
 }

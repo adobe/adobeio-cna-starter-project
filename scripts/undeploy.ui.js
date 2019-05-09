@@ -25,4 +25,7 @@ async function undeployStaticS3 () {
 
 undeployStaticS3()
   .then(() => console.log('Succesfully undeployed UI !'))
-  .catch(e => console.error(e))
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })
