@@ -12,8 +12,7 @@ governing permissions and limitations under the License.
 const yaml = require('js-yaml')
 const fs = require('fs')
 const path = require('path')
-const childProcess = require('child_process')
-
+const spawn = require('cross-spawn')
 const config = require('./script.config')
 
 function deployActionsSync () {
@@ -36,7 +35,6 @@ function deployActionsSync () {
       action.function = path.join(path.relative(config.rootDir, config.distActionsDir), name + '.zip')
     } else {
       action.function = path.join(path.relative(config.rootDir, config.distActionsDir), name + '.js')
-      // this is needed because of https://github.com/apache/incubator-openwhisk-runtime-nodejs/issues/14
       action.main = 'module.exports.' + (action.main || 'main')
     }
   })
@@ -55,7 +53,7 @@ function deployActionsSync () {
 
   process.env['WSK_CONFIG_FILE'] = fakeWskProps
   // aio reads env WHISK_* properties
-  const aio = childProcess.spawnSync(
+  const aio = spawn.sync(
     `aio`,
     [
       'runtime', 'deploy',

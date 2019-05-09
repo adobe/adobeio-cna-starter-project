@@ -1,3 +1,11 @@
+
+[![Build Status](https://travis-ci.com/adobe/adobeio-cna-starter-project.svg?branch=master)](https://travis-ci.com/adobe/adobeio-cna-starter-project)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+<!-- [![Version](https://img.shields.io/npm/v/@adobe/adobeio-cna-starter-project.svg)](https://npmjs.org/package/@adobe/adobeio-cna-starter-project) -->
+
+
+
 # Runtime CNA Starter
 
 A starter project for building a cloud native app (CNA) on top of Adobe I/O Runtime.
@@ -28,10 +36,14 @@ A starter project for building a cloud native app (CNA) on top of Adobe I/O Runt
 - Run `npm run e2e` to run e2e tests
 - Run `npm run coverage` to generate Code coverage report
 
-## Build & Deploy
+## Build, Deploy & Cleanup
 
 - `npm run build` to build your ui:React code and build your actions
 - `npm run deploy` to deploy all actions on Runtime and static files to S3
+- `npm run undeploy` to undeploy the app
+
+For each of the above command you can either append `:ui` or `:actions`, for
+example `npm run build:ui` will only build the UI.
 
 ## Dependencies
 

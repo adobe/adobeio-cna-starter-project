@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 import jsdom from 'jsdom'
 import configure from 'enzyme-adapter-react-helper'
 require('@babel/register')()
-var exposedProperties = ['window', 'navigator', 'document']
+let exposedProperties = ['window', 'navigator', 'document']
 
 const { JSDOM } = jsdom
 const { document } = (new JSDOM('<!doctype html><html><body></body></html>', {

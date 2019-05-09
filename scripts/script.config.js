@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 const yaml = require('js-yaml')
 const fs = require('fs')
 const path = require('path')
+const utils = require('./script.utils')
 
 const rootDir = path.join(__dirname, '..')
 
@@ -50,7 +51,7 @@ config.distActionsDir = path.join(config.distDir, 'actions')
 config.distUIRemoteDir = path.join(config.distDir, 'ui-remote')
 config.distUILocalDir = path.join(config.distDir, 'ui-local')
 config.distWskManifestFile = path.join(config.rootDir, '.manifest-dist.yml')
-config.uiConfigFile = path.join(config.srcUIDir, 'src/config.json')
+config.uiConfigFile = path.join(config.srcUIDir, 'src', 'config.json')
 /// wskManifest config
 config.wskManifestPackagePlaceholder = '__CNA_PACKAGE__'
 config.wskManifest = yaml.safeLoad(fs.readFileSync(config.srcWskManifestFile, 'utf8'))
@@ -58,17 +59,17 @@ config.wskManifestPackage = config.wskManifest.packages[config.wskManifestPackag
 config.wskManifestActions = config.wskManifestPackage.actions
 /// deployment
 config.owDeploymentPackage = `${config.name}-${config.version}`
-config.s3DeploymentFolder = `${config.owNamespace}/${config.owDeploymentPackage}`
+config.s3DeploymentFolder = utils.urlJoin(config.owNamespace, config.owDeploymentPackage)
 // credentials cache
 config.credsCacheFile = path.join(rootDir, '.aws.tmp.creds.json')
 
 // action urls {name: url}, if dev url is /actions/name
 config.actionUrls = Object.entries(config.wskManifestActions).reduce((obj, [name, action]) => {
   const webArg = action['web-export'] || action['web']
-  const webUri = (webArg && webArg !== 'no' && webArg !== 'false') ? 'web/' : ''
+  const webUri = (webArg && webArg !== 'no' && webArg !== 'false') ? 'web' : ''
   obj[name] = (config.remoteActions || process.env['NODE_ENV'] === 'production')
-    ? `${config.owApihost}/api/${config.owApiversion || 'v1'}/${webUri}${config.owNamespace}/${config.owDeploymentPackage}/${name}`
-    : `/actions/${name}` // local url if NODE_ENV!=prod and REMOTE_ACTIONS not set
+    ? utils.urlJoin(config.owApihost, 'api', config.owApiversion || 'v1', webUri, config.owNamespace, config.owDeploymentPackage, name)
+    : utils.urlJoin('/actions', name) // local url if NODE_ENV!=prod and REMOTE_ACTIONS not set
   return obj
 }, {})
 

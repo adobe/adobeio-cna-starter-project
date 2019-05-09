@@ -14,9 +14,10 @@ governing permissions and limitations under the License.
  */
 const Bundler = require('parcel-bundler')
 const express = require('express')
+const open = require('open')
 const ActionRunner = require('./runner')
-
 const config = require('./script.config')
+const path = require('path')
 
 /**
  * Generate Config
@@ -28,7 +29,7 @@ require('./generate.config')
  */
 require('./install.zip.actions.dep')
 
-const bundler = new Bundler('web-src/index.html', {
+const bundler = new Bundler(path.join(config.rootDir, 'web-src', 'index.html'), {
   cache: false,
   outDir: config.distUILocalDir,
   contentHash: false
@@ -51,3 +52,5 @@ const port = Number(process.env.PORT || 9000)
 app.listen(port)
 
 console.log('Serving on port', port)
+
+open(`http://localhost:${port}`)
