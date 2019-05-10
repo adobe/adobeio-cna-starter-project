@@ -13,7 +13,7 @@ before_install:
   - if [ "${TRAVIS_OS_NAME}" = "windows" ]; then choco install googlechrome ; fi
 install:
   - npm version
-  - npm install
+  - npm ci
 script:
   - npm run build
   - npm test
