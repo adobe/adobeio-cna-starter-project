@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 const fs = require('fs')
 
 const config = require('./script.config')
-
+const utils = require('./script.utils')
 /**
  * Generate Config Service Urls
  */
@@ -23,9 +23,4 @@ function generateConfig () {
   )
 }
 
-try {
-  generateConfig()
-} catch (e) {
-  console.error(e)
-  process.exit(1)
-}
+utils.runAsScript(generateConfig)

@@ -14,6 +14,7 @@ const fs = require('fs')
 const path = require('path')
 const spawn = require('cross-spawn')
 const config = require('./script.config')
+const utils = require('./script.utils')
 
 function deployActionsSync () {
   if (!fs.existsSync(config.distActionsDir) || !fs.statSync(config.distActionsDir).isDirectory() || !fs.readdirSync(config.distActionsDir).length) {
@@ -70,12 +71,8 @@ function deployActionsSync () {
   Object.keys(config.wskManifestActions).forEach(an => {
     console.log(`  -> ${an}: ${config.actionUrls[an]}`)
   })
+
+  console.log('Succesfully deployed actions 🎉')
 }
 
-try {
-  deployActionsSync()
-  console.log('Succesfully deployed actions 🎉')
-} catch (e) {
-  console.error(e)
-  process.exit(1)
-}
+utils.runAsScript(deployActionsSync)

@@ -14,6 +14,7 @@ const fs = require('fs-extra')
 const path = require('path')
 
 const config = require('./script.config')
+const utils = require('./script.utils')
 
 async function buildUI () {
   // clean/create needed dirs
@@ -35,8 +36,4 @@ async function buildUI () {
   console.log('UI Build succeeded!')
 }
 
-buildUI()
-  .catch(e => {
-    console.error(e)
-    process.exit(1)
-  })
+utils.runAsScript(buildUI)

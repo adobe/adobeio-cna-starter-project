@@ -169,6 +169,20 @@ function urlJoin (...args) {
   if (args[0] && args[0].startsWith('/')) start = '/'
   return start + args.map(a => a && a.replace(/(^\/|\/$)/g, '')).filter(a => a).join('/')
 }
+/**
+ * Wraps a function and makes sure to exit the process with an error code if
+ * there is an error
+ * @param  {function} f can be sync or async
+ * @returns {Promise}
+ */
+async function runAsScript (f) {
+  try {
+    await f()
+  } catch (e) {
+    console.error(e)
+    process.exit(1)
+  }
+}
 
 module.exports = {
   s3: {
@@ -179,5 +193,6 @@ module.exports = {
   },
   getTmpS3Credentials: getTmpS3Credentials,
   zipFolder: zipFolder,
-  urlJoin: urlJoin
+  urlJoin: urlJoin,
+  runAsScript: runAsScript
 }

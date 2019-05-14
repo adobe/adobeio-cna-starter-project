@@ -32,16 +32,11 @@ async function deployStaticS3 () {
   await utils.s3.uploadDir(s3, config.s3DeploymentFolder,
     config.distUIRemoteDir, f => console.log(`  -> ${path.basename(f)}`))
 
-  return `https://s3.amazonaws.com/${creds.params.Bucket}/${config.s3DeploymentFolder}/index.html`
+  const url = `https://s3.amazonaws.com/${creds.params.Bucket}/${config.s3DeploymentFolder}/index.html`
+
+  console.log(url)
+  console.log('Succesfully deployed UI 🎉')
+  open(url)
 }
 
-deployStaticS3()
-  .then(url => {
-    console.log(url)
-    console.log('Succesfully deployed UI 🎉')
-    return open(url)
-  })
-  .catch(e => {
-    console.error(e)
-    process.exit(1)
-  })
+utils.runAsScript(deployStaticS3)
