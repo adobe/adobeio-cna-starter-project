@@ -85,7 +85,8 @@ S3_BUCKET=<bucket>
 ### `package.json`
 
 - We use the `name` and `version` fields for the deployment. Make sure to fill
-those out.
+  those out. Do not use illegal characters as this might break the deployment
+  (e.g. `/`, `@`, `#`, ..).
 
 ### `manifest.yml`
 

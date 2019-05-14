@@ -1,5 +1,5 @@
 {
-  "name": "@adobe/io-cna-starter-project",
+  "name": "adobeio-cna-starter-project",
   "version": "0.1.0",
   "description": "A starter project for building a cloud native app (CNA) on top of Adobe I/O Runtime",
   "scripts": {
