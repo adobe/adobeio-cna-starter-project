@@ -14,10 +14,11 @@ const fs = require('fs')
 const path = require('path')
 const spawn = require('cross-spawn')
 const config = require('./script.config')
+const utils = require('./script.utils')
 
 function deployActionsSync () {
   if (!fs.existsSync(config.distActionsDir) || !fs.statSync(config.distActionsDir).isDirectory() || !fs.readdirSync(config.distActionsDir).length) {
-    throw new Error(config.distActionsDir + ' should not be empty, maybe you forgot to build your actions ?')
+    throw new Error(`./${path.relative(config.rootDir, config.distActionsDir)}/ should not be empty, maybe you forgot to build your actions ?`)
   }
 
   console.log(`Deploying actions to ${config.owApihost} ...`)
@@ -50,7 +51,6 @@ function deployActionsSync () {
   // for now this is a tmp hack so that ~/.wskprops does not interfer with WHISK_* properties defined in .env
   const fakeWskProps = '.fake-wskprops'
   fs.writeFileSync(fakeWskProps, '')
-
   process.env['WSK_CONFIG_FILE'] = fakeWskProps
   // aio reads env WHISK_* properties
   const aio = spawn.sync(
@@ -61,21 +61,18 @@ function deployActionsSync () {
     ],
     { cwd: config.rootDir }
   )
-  if (aio.error) throw aio.error
-  if (aio.status !== 0) throw new Error(aio.stderr.toString())
-
   // hack end remove fake props file
   fs.unlinkSync(fakeWskProps)
+
+  if (aio.error) throw aio.error
+  if (aio.status !== 0) throw new Error(aio.stderr.toString())
 
   // show list of deployed actions
   Object.keys(config.wskManifestActions).forEach(an => {
     console.log(`  -> ${an}: ${config.actionUrls[an]}`)
   })
+
+  console.log('Succesfully deployed actions 🎉')
 }
 
-try {
-  deployActionsSync()
-  console.log('Succesfully deployed actions 🎉')
-} catch (e) {
-  console.error(e)
-}
+utils.runAsScript(deployActionsSync)

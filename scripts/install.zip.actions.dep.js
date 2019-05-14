@@ -14,6 +14,7 @@ const path = require('path')
 const spawn = require('cross-spawn')
 
 const config = require('./script.config')
+const utils = require('./script.utils')
 
 // sync
 function installDep () {
@@ -29,4 +30,4 @@ function installDep () {
   })
 }
 
-installDep()
+utils.runAsScript(installDep)

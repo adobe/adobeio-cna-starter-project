@@ -18,7 +18,7 @@ const config = require('./script.config')
 
 async function deployStaticS3 () {
   if (!fs.existsSync(config.distUIRemoteDir) || !fs.statSync(config.distUIRemoteDir).isDirectory() || !fs.readdirSync(config.distUIRemoteDir).length) {
-    throw new Error(config.distUIRemoteDir + ' should not be empty, maybe you forgot to build your UI ?')
+    throw new Error(`./${path.relative(config.rootDir, config.distUIRemoteDir)}/ should not be empty, maybe you forgot to build your UI ?`)
   }
   console.log(`Uploading static web files to S3...`)
 
@@ -32,13 +32,11 @@ async function deployStaticS3 () {
   await utils.s3.uploadDir(s3, config.s3DeploymentFolder,
     config.distUIRemoteDir, f => console.log(`  -> ${path.basename(f)}`))
 
-  return `https://s3.amazonaws.com/${creds.params.Bucket}/${config.s3DeploymentFolder}/index.html`
+  const url = `https://s3.amazonaws.com/${creds.params.Bucket}/${config.s3DeploymentFolder}/index.html`
+
+  console.log(url)
+  console.log('Succesfully deployed UI 🎉')
+  open(url)
 }
 
-deployStaticS3()
-  .then(url => {
-    console.log(url)
-    console.log('Succesfully deployed UI 🎉')
-    return open(url)
-  })
-  .catch(e => console.error(e))
+utils.runAsScript(deployStaticS3)
