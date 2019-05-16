@@ -24,10 +24,14 @@ require('dotenv').config({ path: path.join(rootDir, '.env') })
 // config
 const config = {}
 /// dotenv
+if (!process.env.WHISK_APIHOST) throw new Error('Missing WHISK_APIHOST env variable')
+if (!process.env.WHISK_AUTH) throw new Error('Missing WHISK_AUTH env variable')
+if (!process.env.WHISK_NAMESPACE) throw new Error('Missing WHISK_NAMESPACE env variable')
+
 config.owApihost = process.env.WHISK_APIHOST
 config.owNamespace = process.env.WHISK_NAMESPACE
 config.owAuth = process.env.WHISK_AUTH
-config.owApiversion = process.env.WHISK_APIVERSION
+config.owApiversion = process.env.WHISK_APIVERSION || 'v1'
 /// either tvmUrl
 config.tvmUrl = process.env.TVM_URL
 /// or long term creds
@@ -36,6 +40,8 @@ config.s3Creds = (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   params: { Bucket: process.env.S3_BUCKET }
 }
+if (!(config.tvmUrl || config.s3Creds)) throw new Error('Missing s3 credentials or TVM_URL env variable')
+
 /// env
 config.remoteActions = !!process.env.REMOTE_ACTIONS
 /// package.json
@@ -68,7 +74,7 @@ config.actionUrls = Object.entries(config.wskManifestActions).reduce((obj, [name
   const webArg = action['web-export'] || action['web']
   const webUri = (webArg && webArg !== 'no' && webArg !== 'false') ? 'web' : ''
   obj[name] = (config.remoteActions || process.env['NODE_ENV'] === 'production')
-    ? utils.urlJoin(config.owApihost, 'api', config.owApiversion || 'v1', webUri, config.owNamespace, config.owDeploymentPackage, name)
+    ? utils.urlJoin(config.owApihost, 'api', config.owApiversion, webUri, config.owNamespace, config.owDeploymentPackage, name)
     : utils.urlJoin('/actions', name) // local url if NODE_ENV!=prod and REMOTE_ACTIONS not set
   return obj
 }, {})
