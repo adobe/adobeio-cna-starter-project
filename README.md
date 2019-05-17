@@ -1,3 +1,11 @@
+# Archived !!! 
+
+### go and work in public!
+
+https://github.com/adobe/aio-cli-plugin-cna 
+
+---
+
 
 [![Build Status](https://travis-ci.com/adobe/adobeio-cna-starter-project.svg?branch=master)](https://travis-ci.com/adobe/adobeio-cna-starter-project)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
