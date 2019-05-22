@@ -27,11 +27,12 @@ const config = {}
 if (!process.env.WHISK_APIHOST) throw new Error('Missing WHISK_APIHOST env variable')
 if (!process.env.WHISK_AUTH) throw new Error('Missing WHISK_AUTH env variable')
 if (!process.env.WHISK_NAMESPACE) throw new Error('Missing WHISK_NAMESPACE env variable')
+process.env.WHISK_APIVERSION = process.env.WHISK_APIVERSION || 'v1'
 
 config.owApihost = process.env.WHISK_APIHOST
 config.owNamespace = process.env.WHISK_NAMESPACE
 config.owAuth = process.env.WHISK_AUTH
-config.owApiversion = process.env.WHISK_APIVERSION || 'v1'
+config.owApiversion = process.env.WHISK_APIVERSION
 /// either tvmUrl
 config.tvmUrl = process.env.TVM_URL
 /// or long term creds
