@@ -15,7 +15,7 @@ env:
 addons:
   chrome: stable
 before_install:
-  - if [ "${TRAVIS_OS_NAME}" = "windows" ]; then choco install googlechrome ; fi
+  - if [ "${TRAVIS_OS_NAME}" = "windows" ]; then choco install --ignore-checksums googlechrome ; fi
 install:
   - npm version
   - npm install
