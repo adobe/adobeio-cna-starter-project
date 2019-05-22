@@ -6,11 +6,16 @@ node_js:
   - "10"
   - "12"
 env:
-  - CXX=g++-4.8
+  global:
+    - CXX=g++-4.8
+    - WHISK_APIHOST=https://adobeioruntime.net
+    - WHISK_AUTH=fake-auth
+    - WHISK_NAMESPACE=fake
+    - TVM_URL=https://adobeioruntime.net/api/v1/web/adobeio/tvm/get-s3-upload-token
 addons:
   chrome: stable
 before_install:
-  - if [ "${TRAVIS_OS_NAME}" = "windows" ]; then choco install googlechrome ; fi
+  - if [ "${TRAVIS_OS_NAME}" = "windows" ]; then choco install --ignore-checksums googlechrome ; fi
 install:
   - npm version
   - npm ci
