@@ -25,4 +25,4 @@ async function undeployStaticS3 () {
   console.log('Succesfully undeployed UI !')
 }
 
-utils.runAsScript(undeployStaticS3())
+utils.runAsScript(undeployStaticS3)
