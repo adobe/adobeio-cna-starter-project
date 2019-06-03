@@ -9,17 +9,4 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-/* eslint-env jest */
-
-import React from 'react'
-import { mount } from 'enzyme'
-import App from '../../web-src/src/App.js'
-
-describe('<App />', () => {
-  test('should display h1 tag', () => {
-    const wrapper = mount(<App />)
-    const h1 = wrapper.find('h1')
-    expect(h1).toHaveLength(1)
-    expect(h1.text()).toEqual('Hello there')
-  })
-})
+module.exports = ''

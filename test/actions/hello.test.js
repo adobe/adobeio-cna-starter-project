@@ -9,32 +9,30 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-/* eslint-env mocha */
-
-const assert = require('assert')
+/* eslint-env jest */
 const action = require('../../actions/hello')
 
 describe('Action: hello', () => {
   describe('main', () => {
-    it('should return content type json', () => {
+    test('should return content type json', () => {
       const response = action.main({})
-      assert.strictEqual(response.headers['content-type'], 'application/json')
+      expect(response.headers['content-type']).toBe('application/json')
     })
 
-    it('should return default message', () => {
+    test('should return default message', () => {
       const response = action.main({})
-      assert.strictEqual(response.body.message, 'you didn\'t tell me who you are.')
+      expect(response.body.message).toBe('you didn\'t tell me who you are.')
     })
 
-    it('should greet with name', () => {
+    test('should greet with name', () => {
       const response = action.main({ name: 'Atreus' })
-      assert.strictEqual(response.body.message, 'hello Atreus!')
+      expect(response.body.message).toBe('hello Atreus!')
     })
 
-    it('should return error', () => {
+    test('should return error', () => {
       const response = action.main({ name: '!Atreus' })
-      assert.strictEqual(response.statusCode, 400)
-      assert.strictEqual(response.body.error, 'Atreus')
+      expect(response.statusCode).toBe(400)
+      expect(response.body.error).toBe('Atreus')
     })
   })
 })

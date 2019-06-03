@@ -9,7 +9,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-/* eslint-env mocha */
+/* eslint-env jest */
 import assert from 'assert'
 
 import { AppError, RequestValidationError } from '../../web-src/src/services/Errors'

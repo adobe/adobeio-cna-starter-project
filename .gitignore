@@ -20,6 +20,7 @@ config.json
 .vscode
 coverage
 .aws.tmp.creds.json
+junit.xml
 
 # OSX
 .DS_Store
