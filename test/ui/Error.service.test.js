@@ -10,28 +10,27 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 /* eslint-env jest */
-import assert from 'assert'
 
 import { AppError, RequestValidationError } from '../../web-src/src/services/Errors'
 
 describe('Error Service', () => {
   it('should throw an error with custom format', () => {
     const error = new AppError('Reponse from server could not be parsed.', 500)
-    assert.strictEqual(error.name, 'AppError')
-    assert.strictEqual(error.message, 'Reponse from server could not be parsed.')
-    assert.strictEqual(error.status, 500)
+    expect(error.name).toEqual('AppError')
+    expect(error.message).toEqual('Reponse from server could not be parsed.')
+    expect(error.status).toEqual(500)
   })
 
   it('should throw an error with json', () => {
     const error = new AppError({ message: 'Reponse from server could not be parsed.' }, 500)
-    assert.strictEqual(JSON.parse(error.message).message, 'Reponse from server could not be parsed.')
-    assert.strictEqual(error.json.message, 'Reponse from server could not be parsed.')
+    expect(JSON.parse(error.message).message).toEqual('Reponse from server could not be parsed.')
+    expect(error.json.message).toEqual('Reponse from server could not be parsed.')
   })
 
   it('should throw an error with fields', () => {
     const error = new RequestValidationError({ actionName: 'TestAction' })
-    assert.strictEqual(error.fields.actionName, 'TestAction')
-    assert.strictEqual(error.name, 'RequestValidationError')
-    assert.strictEqual(error.status, 400)
+    expect(error.fields.actionName).toEqual('TestAction')
+    expect(error.name).toEqual('RequestValidationError')
+    expect(error.status).toEqual(400)
   })
 })
