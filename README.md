@@ -124,6 +124,43 @@ code.
 - `REMOTE_ACTIONS=true npm run dev` to run the UI locally but access
   remotely deployed actions.
 
+## Debugging in VS Code
+Below is a configuration to run VS Code deubgger to launch and debug both the UI and Actions together.
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Server",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
+      "program": "${workspaceFolder}/scripts/parcel.proxy.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Client",
+      "url": "http://localhost:9080",
+      "webRoot": "${workspaceFolder}/we-src/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    }
+  ],
+  "compounds": [
+    {
+        "name": "Server/Client",
+        "configurations": ["Server", "Client"]
+    }
+  ]
+}
+```
+
 ## Contributing
 
 Contributions are welcomed! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.

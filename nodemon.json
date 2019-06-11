@@ -1,0 +1,19 @@
+{
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/**/node_modules"],
+  "verbose": true,
+  "execMap": {
+    "ts": "node --require ts-node/register"
+  },
+  "watch": [
+    "actions",
+    "web-src/resources",
+    "manifest.yml"
+  ],
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": 9080,
+    "INSPECT": "$NODE_DEBUG_OPTIONS"
+  },
+  "ext": "js"
+}
