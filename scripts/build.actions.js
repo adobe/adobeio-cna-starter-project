@@ -56,4 +56,4 @@ async function buildActions () {
   console.log('Action Build succeeded!')
 }
 
-buildActions().catch(e => console.error(e))
+utils.runAsScript(buildActions)

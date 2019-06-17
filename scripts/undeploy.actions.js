@@ -10,8 +10,10 @@ governing permissions and limitations under the License.
 */
 const fs = require('fs')
 const spawn = require('cross-spawn')
-const config = require('./script.config')
 const path = require('path')
+
+const config = require('./script.config')
+const utils = require('./script.utils')
 
 function undeployActionsSync () {
   if (!fs.existsSync(config.distWskManifestFile) || !fs.statSync(config.distWskManifestFile).isFile()) {
@@ -47,11 +49,8 @@ function undeployActionsSync () {
   Object.keys(config.wskManifestActions).forEach(an => {
     console.log(`  -> ${config.owDeploymentPackage}/${an}`)
   })
+
+  console.log('Succesfully undeployed actions!')
 }
 
-try {
-  undeployActionsSync()
-  console.log('Succesfully undeployed actions!')
-} catch (e) {
-  console.error(e)
-}
+utils.runAsScript(undeployActionsSync)

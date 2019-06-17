@@ -21,8 +21,8 @@ async function undeployStaticS3 () {
   }
   console.info(`Removing static web files from S3...`)
   await utils.s3.emptyFolder(s3, config.s3DeploymentFolder)
+
+  console.log('Succesfully undeployed UI !')
 }
 
-undeployStaticS3()
-  .then(() => console.log('Succesfully undeployed UI !'))
-  .catch(e => console.error(e))
+utils.runAsScript(undeployStaticS3)
