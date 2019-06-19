@@ -38,7 +38,7 @@ async function deployStaticS3 () {
   open(url)
 }
 
-function getAppURL(){
+function getAppURL () {
   return `https://${config.owNamespace}.${config.runtimeHostname}/${config.owDeploymentPackage}/index.html`
 }
 
