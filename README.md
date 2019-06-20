@@ -58,7 +58,7 @@ example `npm run build:ui` will only build the UI.
 
 ```bash
 WHISK_APIVERSION=v1
-WHISK_APIHOST=https://adobeioruntime.net
+WHISK_APIHOST=adobeioruntime.net
 WHISK_AUTH=<AUTH>
 WHISK_NAMESPACE=<namespace>
 # either TVM URL
