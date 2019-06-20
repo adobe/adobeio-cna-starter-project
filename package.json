@@ -30,6 +30,7 @@
   "repository": "adobe/adobeio-cna-starter-project",
   "homepage": "https://github.com/adobe/adobeio-cna-starter-project",
   "devDependencies": {
+    "@adobe/io-sdk-target": "file:./lib/@adobe/io-sdk-target/",
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/polyfill": "^7.2.5",

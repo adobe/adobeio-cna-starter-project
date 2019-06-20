@@ -12,6 +12,7 @@ dist
 # Config
 config.json
 .env
+.aio
 
 # IDE & Temp
 .cache
