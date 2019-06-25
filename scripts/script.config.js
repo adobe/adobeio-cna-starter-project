@@ -33,7 +33,6 @@ config.owApihost = process.env.WHISK_APIHOST
 config.owNamespace = process.env.WHISK_NAMESPACE
 config.owAuth = process.env.WHISK_AUTH
 config.owApiversion = process.env.WHISK_APIVERSION
-config.runtimeHostname = process.env.RUNTIME_HOSTNAME || 'dev.adobe-runtime.com'
 /// either tvmUrl
 config.tvmUrl = process.env.TVM_URL
 /// or long term creds
@@ -76,7 +75,7 @@ config.actionUrls = Object.entries(config.wskManifestActions).reduce((obj, [name
   const webArg = action['web-export'] || action['web']
   const webUri = (webArg && webArg !== 'no' && webArg !== 'false') ? 'web' : ''
   obj[name] = (config.remoteActions || process.env['NODE_ENV'] === 'production')
-    ? utils.urlJoin('https://', config.owNamespace + '.' + config.owApihost, 'api', config.owApiversion || 'v1', webUri, config.owDeploymentPackage, name)
+    ? utils.urlJoin(config.owApihost, 'api', config.owApiversion, webUri, config.owNamespace, config.owDeploymentPackage, name)
     : utils.urlJoin('/actions', name) // local url if NODE_ENV!=prod and REMOTE_ACTIONS not set
   return obj
 }, {})

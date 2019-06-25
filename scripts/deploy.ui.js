@@ -32,14 +32,11 @@ async function deployStaticS3 () {
   await utils.s3.uploadDir(s3, config.s3DeploymentFolder,
     config.distUIRemoteDir, f => console.log(`  -> ${path.basename(f)}`))
 
-  const url = getAppURL()
+  const url = `https://s3.amazonaws.com/${creds.params.Bucket}/${config.s3DeploymentFolder}/index.html`
+
   console.log(url)
   console.log('Succesfully deployed UI 🎉')
   open(url)
-}
-
-function getAppURL () {
-  return `https://${config.owNamespace}.${config.runtimeHostname}/${config.owDeploymentPackage}/index.html`
 }
 
 utils.runAsScript(deployStaticS3)
