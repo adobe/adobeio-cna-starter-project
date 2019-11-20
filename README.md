@@ -8,6 +8,8 @@
 
 # Runtime CNA Starter
 
+# DEPRECATED! PLEASE USE https://github.com/adobe/aio-cli TO MANAGE YOUR NEW APPS!
+
 A starter project for building a cloud native app (CNA) on top of Adobe I/O Runtime.
 
 ## Setup
